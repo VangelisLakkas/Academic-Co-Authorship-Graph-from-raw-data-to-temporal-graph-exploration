@@ -1,0 +1,114 @@
+$ cd "/cygdrive/c/Users/Μπαμπης/Documents/MSc Business Analytics/Social Network Analysis/SNA_project2_Lakkas-Pyknis"
+
+$ ls
+
+$ wc authors.csv
+
+$ awk -F, '{print $1}' authors.csv | sort | uniq
+
+$ cut -d ',' -f 1 authors.csv | sort | uniq
+
+$grep '^2016,' authors.csv | awk -F, '{
+    for (i=1; i<=NF; i++) {
+        if ($i ~ /^"/ && $i !~ /"$/) {
+            j = i
+            while ($j !~ /"$/ && j<=NF) {
+                $i = $i "," $(j+1)
+                for (k=j+1; k<NF; k++) $(k) = $(k+1)
+                NF--
+            }
+        }
+    }
+
+    gsub(/^ *| *$/, "", $3)
+    
+    gsub(/^"|"$/, "", $3)
+
+=    if ($3 ~ /^(WWW|IEEE|KDD|CIKM|ICWSM)$/) print
+}' > filtered_data_2016.csv
+
+
+$grep '^2017,' authors.csv | awk -F, '{
+    for (i=1; i<=NF; i++) {
+        if ($i ~ /^"/ && $i !~ /"$/) {
+            j = i
+            while ($j !~ /"$/ && j<=NF) {
+                $i = $i "," $(j+1)
+                for (k=j+1; k<NF; k++) $(k) = $(k+1)
+                NF--
+            }
+        }
+    }
+
+    gsub(/^ *| *$/, "", $3)
+    
+    gsub(/^"|"$/, "", $3)
+
+    if ($3 ~ /^(WWW|IEEE|KDD|CIKM|ICWSM)$/) print
+}' > filtered_data_2017.csv
+
+
+$ grep '^2018,' authors.csv | awk -F, '{
+    for (i=1; i<=NF; i++) {
+        if ($i ~ /^"/ && $i !~ /"$/) {
+            j = i
+            while ($j !~ /"$/ && j<=NF) {
+                $i = $i "," $(j+1)
+                for (k=j+1; k<NF; k++) $(k) = $(k+1)
+                NF--
+            }
+        }
+    }
+
+    gsub(/^ *| *$/, "", $3)
+    
+    gsub(/^"|"$/, "", $3)
+
+    # Print if the 3rd field matches the specified values
+    if ($3 ~ /^(WWW|IEEE|KDD|CIKM|ICWSM)$/) print
+}' > filtered_data_2018.csv
+
+
+grep '^2019,' authors.csv | awk -F, '{
+    # Combine fields that are split incorrectly due to commas within quotes
+    for (i=1; i<=NF; i++) {
+        if ($i ~ /^"/ && $i !~ /"$/) {
+            j = i
+            while ($j !~ /"$/ && j<=NF) {
+                $i = $i "," $(j+1)
+                for (k=j+1; k<NF; k++) $(k) = $(k+1)
+                NF--
+            }
+        }
+    }
+
+    gsub(/^ *| *$/, "", $3)
+    
+    gsub(/^"|"$/, "", $3)
+
+    if ($3 ~ /^(WWW|IEEE|KDD|CIKM|ICWSM)$/) print
+}' > filtered_data_2019.csv
+
+
+grep '^2020,' authors.csv | awk -F, '{
+    for (i=1; i<=NF; i++) {
+        if ($i ~ /^"/ && $i !~ /"$/) {
+            j = i
+            while ($j !~ /"$/ && j<=NF) {
+                $i = $i "," $(j+1)
+                for (k=j+1; k<NF; k++) $(k) = $(k+1)
+                NF--
+            }
+        }
+    }
+
+    gsub(/^ *| *$/, "", $3)
+    
+    gsub(/^"|"$/, "", $3)
+
+    if ($3 ~ /^(WWW|IEEE|KDD|CIKM|ICWSM)$/) print
+}' > filtered_data_2020.csv
+
+
+
+
